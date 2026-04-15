@@ -1,0 +1,135 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model User {
+  id           String    @id @default(cuid())
+  email        String    @unique
+  passwordHash String
+  name         String?
+  createdAt    DateTime  @default(now())
+  addresses    Address[]
+  cartItems    CartItem[]
+  orders       Order[]
+}
+
+model Address {
+  id        String @id @default(cuid())
+  userId    String
+  fullName  String
+  phone     String
+  city      String
+  street    String
+  postal    String
+  user      User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Product {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  category    String
+  name        String
+  brand       String
+  price       Int
+  image       String
+  description String
+  stock       Int      @default(10)
+  createdAt   DateTime @default(now())
+
+  // Compatibility fields (nullable; only set per category)
+  socket              String?
+  tdp                 Int?
+  cores               Int?
+  threads             Int?
+  baseClockGhz        Float?
+  gpuLengthMm         Int?
+  gpuPowerDraw        Int?
+  vramGb              Int?
+  ramType             String?
+  ramSpeedMhz         Int?
+  ramCapacityGb       Int?
+  formFactor          String?
+  supportedFormFactors String?
+  maxGpuLengthMm      Int?
+  wattage             Int?
+  supportedSockets    String?
+  maxTdp              Int?
+  connection          String?
+  impedanceOhm        Int?
+  subtype             String?
+
+  cartItems   CartItem[]
+  orderItems  OrderItem[]
+  builds      BuildComponent[]
+}
+
+model CartItem {
+  id        String  @id @default(cuid())
+  userId    String?
+  sessionId String?
+  productId String
+  quantity  Int     @default(1)
+  addedAt   DateTime @default(now())
+
+  user    User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([sessionId])
+}
+
+model Order {
+  id           String      @id @default(cuid())
+  userId       String
+  status       String      @default("pending")
+  total        Int
+  fullName     String
+  phone        String
+  city         String
+  street       String
+  postal       String
+  createdAt    DateTime    @default(now())
+  user         User        @relation(fields: [userId], references: [id])
+  items        OrderItem[]
+
+  @@index([userId])
+}
+
+model PrebuiltBuild {
+  id          String           @id @default(cuid())
+  slug        String           @unique
+  name        String
+  tagline     String
+  description String
+  tier        String
+  image       String?
+  createdAt   DateTime         @default(now())
+  components  BuildComponent[]
+}
+
+model BuildComponent {
+  id        String        @id @default(cuid())
+  buildId   String
+  productId String
+  build     PrebuiltBuild @relation(fields: [buildId], references: [id], onDelete: Cascade)
+  product   Product       @relation(fields: [productId], references: [id])
+
+  @@unique([buildId, productId])
+}
+
+model OrderItem {
+  id        String  @id @default(cuid())
+  orderId   String
+  productId String
+  name      String
+  category  String
+  price     Int
+  quantity  Int
+  order     Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product   Product @relation(fields: [productId], references: [id])
+}
