@@ -1,7 +1,8 @@
 import { PrismaClient } from "../src/generated/prisma/client";
-import { PrismaBetterSqlite3 } from "@prisma/adapter-better-sqlite3";
+import { PrismaPg } from "@prisma/adapter-pg";
+import "dotenv/config";
 
-const adapter = new PrismaBetterSqlite3({ url: "file:./dev.db" });
+const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL! });
 const prisma = new PrismaClient({ adapter });
 
 const products = [
@@ -12,6 +13,7 @@ const products = [
     name: "Intel Core i5-13400F",
     brand: "Intel",
     price: 8990,
+    discount: 15,
     image: "/products/cpu-intel.svg",
     description: "10 ядер (6P+4E), 16 потоків, до 4.6 ГГц. Відмінний баланс ціни та продуктивності.",
     socket: "LGA1700",
@@ -70,6 +72,7 @@ const products = [
     name: "NVIDIA RTX 4060 8GB",
     brand: "NVIDIA",
     price: 14990,
+    discount: 10,
     image: "/products/gpu-nvidia.svg",
     description: "8 ГБ GDDR6, DLSS 3, Ray Tracing. Для 1080p ультра.",
     gpuLengthMm: 245,
@@ -170,6 +173,7 @@ const products = [
     name: "Kingston Fury Beast 32GB DDR5-6000",
     brand: "Kingston",
     price: 4990,
+    discount: 20,
     image: "/products/ram.svg",
     description: "2x16 ГБ, CL36, з підсвіткою.",
     ramType: "DDR5",
@@ -243,6 +247,7 @@ const products = [
     name: "Lian Li Lancool 216",
     brand: "Lian Li",
     price: 4490,
+    discount: 12,
     image: "/products/case.svg",
     description: "Mid-Tower ATX, відмінний airflow, загартоване скло.",
     supportedFormFactors: "ATX,mATX,ITX",
@@ -289,6 +294,7 @@ const products = [
     name: "DeepCool AK620",
     brand: "DeepCool",
     price: 2790,
+    discount: 10,
     image: "/products/cooler.svg",
     description: "Двобаштовий кулер з відмінною продуктивністю.",
     supportedSockets: "LGA1700,AM5,AM4",
@@ -314,6 +320,7 @@ const products = [
     name: "HyperX Cloud III",
     brand: "HyperX",
     price: 3990,
+    discount: 25,
     image: "/products/headset.svg",
     description: "Дротові навушники 53 мм, мікрофон з шумозаглушенням.",
     connection: "USB/3.5mm",

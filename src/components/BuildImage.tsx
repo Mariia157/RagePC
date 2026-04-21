@@ -26,7 +26,7 @@ export default function BuildImage({
 
   return (
     <div
-      className={`${ASPECT[aspect]} w-full bg-[var(--color-surface-2)] rounded-md overflow-hidden flex items-center justify-center relative ${className}`}
+      className={`${ASPECT[aspect]} w-full bg-[var(--color-surface-2)] rounded-xl overflow-hidden flex items-center justify-center relative ${className}`}
     >
       {hasImage ? (
         <Image

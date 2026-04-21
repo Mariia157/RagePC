@@ -30,3 +30,8 @@ export function isPeripheralSubtype(v: string): v is PeripheralSubtype {
 export function formatPrice(amount: number): string {
   return `${amount.toLocaleString("uk-UA")} ₴`;
 }
+
+export function calcDiscountedPrice(price: number, discount: number | null | undefined): number {
+  if (!discount) return price;
+  return Math.round(price * (1 - discount / 100));
+}

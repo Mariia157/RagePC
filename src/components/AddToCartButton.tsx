@@ -3,6 +3,7 @@
 import { useTransition, useState } from "react";
 import { ShoppingCart, Check } from "lucide-react";
 import { addToCart } from "@/app/cart/actions";
+import { useLang } from "@/components/LangProvider";
 
 export default function AddToCartButton({
   productId,
@@ -13,6 +14,7 @@ export default function AddToCartButton({
 }) {
   const [pending, startTransition] = useTransition();
   const [added, setAdded] = useState(false);
+  const { t } = useLang();
 
   function handleClick() {
     startTransition(async () => {
@@ -26,16 +28,16 @@ export default function AddToCartButton({
     <button
       onClick={handleClick}
       disabled={disabled || pending}
-      className="btn-primary w-full md:w-auto"
+      className="btn-primary w-full md:w-auto rounded-full"
     >
       {added ? (
         <>
-          <Check size={18} /> Додано
+          <Check size={18} /> {t("product.added")}
         </>
       ) : (
         <>
           <ShoppingCart size={18} />
-          {pending ? "Додаємо..." : "В кошик"}
+          {pending ? t("product.adding") : t("product.addToCart")}
         </>
       )}
     </button>

@@ -1,9 +1,11 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
-import { CATEGORIES, formatPrice, type Category } from "@/lib/categories";
+import { CATEGORIES, formatPrice, calcDiscountedPrice, type Category } from "@/lib/categories";
 import AddToCartButton from "@/components/AddToCartButton";
 import ProductImage from "@/components/ProductImage";
+import FavoriteButton from "@/components/FavoriteButton";
+import { Check, Truck, Shield } from "lucide-react";
 
 function buildSpecs(p: Awaited<ReturnType<typeof prisma.product.findUnique>>) {
   if (!p) return [] as { label: string; value: string }[];
@@ -48,10 +50,10 @@ export default async function ProductPage({
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-8">
-      <nav className="text-sm text-[var(--color-muted)] mb-4">
-        <Link href="/" className="hover:text-white">Головна</Link>
+      <nav className="text-sm text-[var(--color-muted)] mb-6">
+        <Link href="/" className="hover:text-white transition">Головна</Link>
         <span className="mx-2">/</span>
-        <Link href={`/catalog/${category}`} className="hover:text-white">
+        <Link href={`/catalog/${category}`} className="hover:text-white transition">
           {CATEGORIES[category] ?? category}
         </Link>
         <span className="mx-2">/</span>
@@ -65,35 +67,74 @@ export default async function ProductPage({
             alt={product.name}
             brand={product.brand}
             size="xl"
+            className="rounded-xl"
           />
         </div>
 
         <div>
-          <div className="text-sm text-[var(--color-muted)] uppercase tracking-wide">
+          <div className="text-sm text-[var(--color-muted)] uppercase tracking-wider font-medium">
             {product.brand}
           </div>
-          <h1 className="text-3xl font-bold mt-1">{product.name}</h1>
-          <p className="mt-4 text-[var(--color-muted)]">{product.description}</p>
+          <h1 className="text-3xl font-bold mt-2">{product.name}</h1>
+          <p className="mt-4 text-[var(--color-muted)] leading-relaxed">
+            {product.description}
+          </p>
 
           <div className="mt-6 flex items-baseline gap-3">
             <div className="text-4xl font-black text-[var(--color-brand)]">
-              {formatPrice(product.price)}
+              {formatPrice(calcDiscountedPrice(product.price, product.discount))}
             </div>
-            <div className="text-sm text-[var(--color-muted)]">
-              {product.stock > 0 ? `В наявності: ${product.stock} шт.` : "Немає в наявності"}
-            </div>
+            {product.discount && (
+              <>
+                <div className="text-lg text-[var(--color-muted)] line-through">
+                  {formatPrice(product.price)}
+                </div>
+                <span className="bg-[var(--color-brand)] text-white text-sm font-bold px-2.5 py-0.5 rounded-full">
+                  -{product.discount}%
+                </span>
+              </>
+            )}
           </div>
 
-          <div className="mt-6">
+          <div className="mt-3 flex items-center gap-2 text-sm">
+            {product.stock > 0 ? (
+              <span className="inline-flex items-center gap-1.5 text-[var(--color-success)]">
+                <Check size={14} /> В наявності ({product.stock} шт.)
+              </span>
+            ) : (
+              <span className="text-[var(--color-muted)]">Немає в наявності</span>
+            )}
+          </div>
+
+          <div className="mt-6 flex items-center gap-3">
             <AddToCartButton productId={product.id} disabled={product.stock <= 0} />
+            <FavoriteButton productId={product.id} className="w-11 h-11" />
+          </div>
+
+          {/* Delivery info */}
+          <div className="mt-6 rounded-2xl bg-[var(--color-surface)] border border-[var(--color-border)] p-4 space-y-3">
+            <div className="flex items-center gap-3 text-sm">
+              <Truck size={18} className="text-[var(--color-brand)] shrink-0" />
+              <div>
+                <div className="font-medium">Доставка</div>
+                <div className="text-[var(--color-muted)]">Нова Пошта, Укрпошта — від 1 дня</div>
+              </div>
+            </div>
+            <div className="flex items-center gap-3 text-sm">
+              <Shield size={18} className="text-[var(--color-brand)] shrink-0" />
+              <div>
+                <div className="font-medium">Гарантія</div>
+                <div className="text-[var(--color-muted)]">Офіційна гарантія 24 місяці</div>
+              </div>
+            </div>
           </div>
 
           {specs.length > 0 && (
             <div className="mt-8">
               <h2 className="text-lg font-semibold mb-3">Характеристики</h2>
-              <dl className="card divide-y divide-[var(--color-border)]">
+              <dl className="rounded-2xl bg-[var(--color-surface)] border border-[var(--color-border)] divide-y divide-[var(--color-border)] overflow-hidden">
                 {specs.map((s) => (
-                  <div key={s.label} className="flex justify-between px-4 py-2 text-sm">
+                  <div key={s.label} className="flex justify-between px-4 py-3 text-sm">
                     <dt className="text-[var(--color-muted)]">{s.label}</dt>
                     <dd className="font-medium">{s.value}</dd>
                   </div>
