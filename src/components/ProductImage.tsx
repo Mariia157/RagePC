@@ -34,7 +34,7 @@ export default function ProductImage({
 
   return (
     <div
-      className={`${SIZE_CLASS[size]} bg-[var(--color-surface-2)] rounded-xl overflow-hidden flex items-center justify-center shrink-0 relative ${className}`}
+      className={`${SIZE_CLASS[size]} bg-white rounded-xl overflow-hidden flex items-center justify-center shrink-0 relative ${className}`}
     >
       {hasImage ? (
         <Image

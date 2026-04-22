@@ -11,12 +11,17 @@ export default function FooterClient() {
 
   const shopLinks = [
     { href: "/catalog/cpu", labelKey: "cat.cpu" as const },
-    { href: "/catalog/gpu", labelKey: "cat.gpu" as const },
     { href: "/catalog/motherboard", labelKey: "cat.motherboard" as const },
+    { href: "/catalog/gpu", labelKey: "cat.gpu" as const },
     { href: "/catalog/ram", labelKey: "cat.ram" as const },
+    { href: "/catalog/ssd", labelKey: "cat.ssd" as const },
+    { href: "/catalog/hdd", labelKey: "cat.hdd" as const },
     { href: "/catalog/psu", labelKey: "cat.psu" as const },
     { href: "/catalog/case", labelKey: "cat.case" as const },
-    { href: "/catalog/cooler", labelKey: "cat.cooler" as const },
+    { href: "/catalog/air_cooler", labelKey: "cat.air_cooler" as const },
+    { href: "/catalog/water_cooler", labelKey: "cat.water_cooler" as const },
+    { href: "/catalog/sound_card", labelKey: "cat.sound_card" as const },
+    { href: "/catalog/network_card", labelKey: "cat.network_card" as const },
     { href: "/catalog/headset", labelKey: "cat.headset" as const },
   ];
 

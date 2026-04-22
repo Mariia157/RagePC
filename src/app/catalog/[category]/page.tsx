@@ -10,12 +10,12 @@ import {
 } from "@/lib/categories";
 import ProductCardWithPopup from "@/components/ProductCardWithPopup";
 import CatalogFilters from "@/components/CatalogFilters";
+import MobileFilterToggle from "@/components/MobileFilterToggle";
 
 const SORTS = {
   popular: { createdAt: "desc" as const },
   "price-asc": { price: "asc" as const },
   "price-desc": { price: "desc" as const },
-  name: { name: "asc" as const },
 };
 
 type SortKey = keyof typeof SORTS;
@@ -24,7 +24,6 @@ const SORT_LABELS: Record<SortKey, string> = {
   popular: "Популярні",
   "price-asc": "Ціна ↑",
   "price-desc": "Ціна ↓",
-  name: "За алфавітом",
 };
 
 // Spec filter config per category
@@ -44,14 +43,34 @@ const SPEC_FILTERS: Record<string, { key: string; label: string; field: string }
     { key: "ramType", label: "Тип пам'яті", field: "ramType" },
     { key: "ramCapacityGb", label: "Об'єм (ГБ)", field: "ramCapacityGb" },
   ],
+  ssd: [
+    { key: "interfaceType", label: "Інтерфейс", field: "interfaceType" },
+    { key: "capacityGb", label: "Об'єм (ГБ)", field: "capacityGb" },
+  ],
+  hdd: [
+    { key: "capacityTb", label: "Об'єм (ТБ)", field: "capacityTb" },
+    { key: "rpm", label: "Обертів за хв.", field: "rpm" },
+  ],
   psu: [
     { key: "wattage", label: "Потужність (Вт)", field: "wattage" },
   ],
   case: [
     { key: "supportedFormFactors", label: "Форм-фактори", field: "supportedFormFactors" },
   ],
-  cooler: [
+  air_cooler: [
     { key: "supportedSockets", label: "Сокети", field: "supportedSockets" },
+  ],
+  water_cooler: [
+    { key: "supportedSockets", label: "Сокети", field: "supportedSockets" },
+    { key: "radiatorMm", label: "Радіатор (мм)", field: "radiatorMm" },
+  ],
+  sound_card: [
+    { key: "interfaceType", label: "Інтерфейс", field: "interfaceType" },
+    { key: "channels", label: "Канали", field: "channels" },
+  ],
+  network_card: [
+    { key: "networkSpeed", label: "Швидкість", field: "networkSpeed" },
+    { key: "interfaceType", label: "Інтерфейс", field: "interfaceType" },
   ],
   headset: [
     { key: "connection", label: "Підключення", field: "connection" },
@@ -241,8 +260,18 @@ export default async function CatalogPage({
         </div>
       )}
 
+      <MobileFilterToggle>
+        <CatalogFilters
+          category={category}
+          brands={brandGroups}
+          priceRange={priceRange}
+          specFilters={specFilterData}
+          hasDiscount={hasDiscount}
+        />
+      </MobileFilterToggle>
+
       <div className="grid grid-cols-12 gap-6">
-        <aside className="col-span-12 md:col-span-3">
+        <aside className="hidden md:block md:col-span-3">
           <div className="card p-5 md:sticky md:top-40">
             <CatalogFilters
               category={category}
@@ -260,7 +289,7 @@ export default async function CatalogPage({
               Товарів не знайдено.
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
               {filtered.map((p) => (
                 <ProductCardWithPopup key={p.id} product={p} />
               ))}

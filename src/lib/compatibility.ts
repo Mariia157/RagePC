@@ -38,12 +38,15 @@ export const EMPTY_BUILD: BuildSelection = {
   cooler: null,
 };
 
+/** Categories that map to the "cooler" build slot */
+export const COOLER_CATEGORIES = ["air_cooler", "water_cooler"] as const;
+
 export const BUILD_STEPS = [
   { key: "cpu", label: "Процесор" },
   { key: "motherboard", label: "Мат. плата" },
   { key: "ram", label: "Пам'ять" },
   { key: "gpu", label: "Відеокарта" },
-  { key: "cooler", label: "Охолодження" },
+  { key: "cooler", label: "Охолодження", categories: ["air_cooler", "water_cooler"] },
   { key: "case", label: "Корпус" },
   { key: "psu", label: "Блок живлення" },
 ] as const;
@@ -83,7 +86,8 @@ export function isCompatible(
         return { ok: false, reason: `Довжина ${product.gpuLengthMm} мм перевищує межу корпуса (${build.case.maxGpuLengthMm} мм)` };
       return { ok: true };
 
-    case "cooler":
+    case "air_cooler":
+    case "water_cooler":
       if (build.cpu?.socket && product.supportedSockets && !product.supportedSockets.split(",").includes(build.cpu.socket))
         return { ok: false, reason: `Не підтримує сокет ${build.cpu.socket}` };
       if (build.cpu?.tdp && product.maxTdp && build.cpu.tdp > product.maxTdp)

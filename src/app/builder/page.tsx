@@ -164,7 +164,7 @@ export default function BuilderStartPage() {
       {/* How it works */}
       <section className="mx-auto max-w-7xl px-4 py-16 border-t border-[var(--color-border)]">
         <h2 className="text-2xl font-bold mb-8 text-center">Як працює конфігуратор</h2>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-y-6 gap-x-10">
           {steps.map((step, i) => (
             <div key={step.num} className="relative">
               <div className="rounded-2xl bg-[var(--color-surface)] border border-[var(--color-border)] p-6 h-full hover:border-[var(--color-brand)] transition">
@@ -180,7 +180,7 @@ export default function BuilderStartPage() {
                 </p>
               </div>
               {i < steps.length - 1 && (
-                <div className="hidden md:flex absolute top-1/2 -right-3 -translate-y-1/2 z-10">
+                <div className="hidden md:flex absolute top-1/2 -translate-y-1/2 -right-[25px]">
                   <ArrowRight size={20} className="text-[var(--color-brand)]" />
                 </div>
               )}

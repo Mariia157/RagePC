@@ -14,7 +14,8 @@ const CAT_KEYS: Record<string, DictKey> = {
   ram: "build.catLabels.ram",
   psu: "build.catLabels.psu",
   case: "build.catLabels.case",
-  cooler: "build.catLabels.cooler",
+  air_cooler: "build.catLabels.air_cooler",
+  water_cooler: "build.catLabels.water_cooler",
 };
 
 type BuildData = {

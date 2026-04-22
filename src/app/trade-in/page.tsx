@@ -1,3 +1,4 @@
+import React from "react";
 import {
   ArrowRight,
   ClipboardList,
@@ -96,10 +97,15 @@ export default function TradeInPage() {
       {/* How it works */}
       <section id="how" className="mx-auto max-w-7xl px-4 py-16">
         <h2 className="text-2xl font-bold mb-8 text-center">Як це працює</h2>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-4 md:items-center gap-y-6 gap-x-10">
           {steps.map((step, i) => (
-            <div key={step.title} className="relative">
-              <div className="rounded-2xl bg-[var(--color-surface)] border border-[var(--color-border)] p-6 h-full hover:border-[var(--color-brand)] transition">
+            <React.Fragment key={step.title}>
+              <div className="relative rounded-2xl bg-[var(--color-surface)] border border-[var(--color-border)] p-6 h-full hover:border-[var(--color-brand)] transition">
+                {i < steps.length - 1 && (
+                  <div className="hidden md:flex absolute top-1/2 -translate-y-1/2 -right-[25px]">
+                    <ArrowRight size={20} className="text-[var(--color-brand)]" />
+                  </div>
+                )}
                 <div className="w-12 h-12 rounded-2xl bg-[var(--color-brand)]/10 flex items-center justify-center mb-4">
                   <step.icon size={24} className="text-[var(--color-brand)]" />
                 </div>
@@ -111,12 +117,7 @@ export default function TradeInPage() {
                   {step.text}
                 </p>
               </div>
-              {i < steps.length - 1 && (
-                <div className="hidden md:flex absolute top-1/2 -right-3 -translate-y-1/2 z-10">
-                  <ArrowRight size={20} className="text-[var(--color-brand)]" />
-                </div>
-              )}
-            </div>
+            </React.Fragment>
           ))}
         </div>
       </section>

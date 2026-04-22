@@ -1,11 +1,16 @@
 export const CATEGORIES = {
   cpu: "Процесори",
-  gpu: "Відеокарти",
   motherboard: "Материнські плати",
+  gpu: "Відеокарти",
   ram: "Оперативна пам'ять",
+  ssd: "Накопичувачі SSD",
+  hdd: "Накопичувачі HDD",
   psu: "Блоки живлення",
   case: "Корпуси",
-  cooler: "Охолодження",
+  air_cooler: "Повітряне охолодження",
+  water_cooler: "Водяне охолодження",
+  sound_card: "Звукові карти",
+  network_card: "Мережеві карти",
   headset: "Периферія",
 } as const;
 

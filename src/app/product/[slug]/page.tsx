@@ -33,6 +33,19 @@ function buildSpecs(p: Awaited<ReturnType<typeof prisma.product.findUnique>>) {
   push("Макс. TDP охолодження", p.maxTdp, " Вт");
   push("Підключення", p.connection);
   push("Імпеданс", p.impedanceOhm, " Ом");
+  push("Об'єм", p.capacityGb, " ГБ");
+  push("Швидкість читання", p.readSpeedMBs, " МБ/с");
+  push("Швидкість запису", p.writeSpeedMBs, " МБ/с");
+  push("Інтерфейс", p.interfaceType);
+  push("Об'єм", p.capacityTb, " ТБ");
+  push("Обертів за хв.", p.rpm);
+  push("Кеш", p.cacheMb, " МБ");
+  push("Радіатор", p.radiatorMm, " мм");
+  push("Канали", p.channels);
+  push("Частота дискретизації", p.sampleRateKhz, " кГц");
+  push("Розрядність", p.bitDepth, " біт");
+  push("Швидкість мережі", p.networkSpeed);
+  push("Wi-Fi", p.wireless ? "Так" : p.wireless === false ? "Ні" : null);
   return specs;
 }
 

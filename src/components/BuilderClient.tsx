@@ -181,7 +181,14 @@ export default function BuilderClient({ products }: { products: BuildProduct[] }
     });
   }
 
-  const activeList = grouped[activeStep] ?? [];
+  const activeStepConfig = BUILD_STEPS.find((s) => s.key === activeStep);
+  const activeList: BuildProduct[] = useMemo(() => {
+    if (activeStepConfig && "categories" in activeStepConfig) {
+      const cats = (activeStepConfig as unknown as { categories: readonly string[] }).categories;
+      return cats.flatMap((cat: string) => grouped[cat] ?? []);
+    }
+    return grouped[activeStep] ?? [];
+  }, [grouped, activeStep, activeStepConfig]);
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-6">

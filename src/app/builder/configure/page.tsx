@@ -3,7 +3,7 @@ import BuilderClient from "@/components/BuilderClient";
 
 export default async function BuilderConfigurePage() {
   const products = await prisma.product.findMany({
-    where: { category: { in: ["cpu", "motherboard", "ram", "gpu", "psu", "case", "cooler"] } },
+    where: { category: { in: ["cpu", "motherboard", "ram", "gpu", "psu", "case", "air_cooler", "water_cooler"] } },
     orderBy: { price: "asc" },
     select: {
       id: true,

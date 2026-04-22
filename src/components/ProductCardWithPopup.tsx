@@ -55,12 +55,16 @@ export default function ProductCardWithPopup({ product }: { product: ProductData
   const discounted = calcDiscountedPrice(product.price, product.discount);
   const specs = getQuickSpecs(product);
 
+  const isTouchDevice = typeof window !== "undefined" && "ontouchstart" in window;
+
   function handleMouseEnter() {
+    if (isTouchDevice) return;
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
     timeoutRef.current = setTimeout(() => setHovered(true), 300);
   }
 
   function handleMouseLeave() {
+    if (isTouchDevice) return;
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
     timeoutRef.current = setTimeout(() => setHovered(false), 200);
   }
@@ -126,7 +130,7 @@ export default function ProductCardWithPopup({ product }: { product: ProductData
             <button
               onClick={handleAddToCart}
               disabled={pending}
-              className="w-9 h-9 rounded-full bg-[var(--color-brand)]/10 flex items-center justify-center hover:bg-[var(--color-brand)] transition-all duration-200 group/btn"
+              className="w-10 h-10 md:w-9 md:h-9 rounded-full bg-[var(--color-brand)]/10 flex items-center justify-center hover:bg-[var(--color-brand)] transition-all duration-200 group/btn"
             >
               {added ? (
                 <Check size={16} className="text-[var(--color-success)]" />

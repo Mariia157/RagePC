@@ -13,6 +13,12 @@ import {
   BatteryCharging,
   Headphones,
   ArrowLeftRight,
+  CircuitBoard,
+  Disc3,
+  Database,
+  Droplets,
+  AudioLines,
+  Wifi,
   type LucideIcon,
 } from "lucide-react";
 import { useLang } from "@/components/LangProvider";
@@ -20,12 +26,17 @@ import type { DictKey } from "@/lib/i18n";
 
 const categories: { href: string; labelKey: DictKey; descKey: DictKey; icon: LucideIcon }[] = [
   { href: "/catalog/cpu", labelKey: "cat.cpu", descKey: "cat.cpu.desc", icon: Cpu },
+  { href: "/catalog/motherboard", labelKey: "cat.motherboard", descKey: "cat.motherboard.desc", icon: CircuitBoard },
   { href: "/catalog/gpu", labelKey: "cat.gpu", descKey: "cat.gpu.desc", icon: MonitorSpeaker },
-  { href: "/catalog/motherboard", labelKey: "cat.motherboard", descKey: "cat.motherboard.desc", icon: HardDrive },
   { href: "/catalog/ram", labelKey: "cat.ram", descKey: "cat.ram.desc", icon: MemoryStick },
+  { href: "/catalog/ssd", labelKey: "cat.ssd", descKey: "cat.ssd.desc", icon: HardDrive },
+  { href: "/catalog/hdd", labelKey: "cat.hdd", descKey: "cat.hdd.desc", icon: Database },
   { href: "/catalog/psu", labelKey: "cat.psu", descKey: "cat.psu.desc", icon: BatteryCharging },
   { href: "/catalog/case", labelKey: "cat.case", descKey: "cat.case.desc", icon: Box },
-  { href: "/catalog/cooler", labelKey: "cat.cooler", descKey: "cat.cooler.desc", icon: Fan },
+  { href: "/catalog/air_cooler", labelKey: "cat.air_cooler", descKey: "cat.air_cooler.desc", icon: Fan },
+  { href: "/catalog/water_cooler", labelKey: "cat.water_cooler", descKey: "cat.water_cooler.desc", icon: Droplets },
+  { href: "/catalog/sound_card", labelKey: "cat.sound_card", descKey: "cat.sound_card.desc", icon: AudioLines },
+  { href: "/catalog/network_card", labelKey: "cat.network_card", descKey: "cat.network_card.desc", icon: Wifi },
   { href: "/catalog/headset", labelKey: "cat.headset", descKey: "cat.headset.desc", icon: Headphones },
   { href: "/trade-in", labelKey: "nav.tradein", descKey: "cat.tradein.desc", icon: ArrowLeftRight },
 ];
@@ -60,7 +71,7 @@ export default function CatalogDropdown() {
       </button>
 
       {open && (
-        <div className="absolute left-0 top-full mt-2 w-[420px] bg-[var(--color-surface)] border border-[var(--color-border)] rounded-2xl shadow-2xl shadow-black/50 z-50 p-3 grid grid-cols-1 gap-1 animate-scale-in">
+        <div className="absolute left-0 top-full mt-2 w-[560px] bg-[var(--color-surface)] border border-[var(--color-border)] rounded-2xl shadow-2xl shadow-black/50 z-50 p-3 grid grid-cols-2 gap-1 animate-scale-in">
           {categories.map((cat) => (
             <Link
               key={cat.href}

@@ -64,6 +64,27 @@ model Product {
   impedanceOhm        Int?
   subtype             String?
 
+  // SSD / HDD
+  capacityGb          Int?
+  readSpeedMBs        Int?
+  writeSpeedMBs       Int?
+  interfaceType       String?
+  capacityTb          Int?
+  rpm                 Int?
+  cacheMb             Int?
+
+  // Water cooler
+  radiatorMm          Int?
+
+  // Sound card
+  channels            String?
+  sampleRateKhz       Int?
+  bitDepth            Int?
+
+  // Network card
+  networkSpeed        String?
+  wireless            Boolean?
+
   cartItems   CartItem[]
   orderItems  OrderItem[]
   builds      BuildComponent[]
