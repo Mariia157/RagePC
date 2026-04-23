@@ -16,8 +16,8 @@ type SortKey = keyof typeof SORTS;
 
 const SORT_LABELS: Record<SortKey, string> = {
   discount: "Знижка",
-  "price-asc": "Ціна ↑",
-  "price-desc": "Ціна ↓",
+  "price-asc": "Ціна (зрост.)",
+  "price-desc": "Ціна (спад.)",
 };
 
 export default async function SalesPage({

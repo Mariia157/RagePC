@@ -1,5 +1,6 @@
 import { notFound, redirect } from "next/navigation";
 import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import { getCurrentUserId } from "@/lib/session";
 import { formatPrice, CATEGORIES, type Category } from "@/lib/categories";
@@ -21,8 +22,8 @@ export default async function OrderDetailPage({
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-8">
-      <Link href="/account/orders" className="text-sm text-[var(--color-muted)] hover:text-white">
-        ← До списку замовлень
+      <Link href="/account/orders" className="text-sm text-[var(--color-muted)] hover:text-white inline-flex items-center gap-1">
+        <ArrowLeft size={14} /> До списку замовлень
       </Link>
 
       <div className="flex items-start justify-between gap-4 flex-wrap mt-3">

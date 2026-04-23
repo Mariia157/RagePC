@@ -80,7 +80,7 @@ export function HeaderTopInfo() {
   return (
     <div className="flex items-center gap-4">
       <span>{t("header.delivery")}</span>
-      <span className="hidden sm:inline">•</span>
+      <span className="hidden sm:inline w-1 h-1 rounded-full bg-[var(--color-muted)]" />
       <span className="hidden sm:inline">{t("header.warranty")}</span>
     </div>
   );

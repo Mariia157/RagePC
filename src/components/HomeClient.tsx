@@ -44,17 +44,17 @@ type PopularQuery = {
 };
 
 const popularQueries: PopularQuery[] = [
-  { href: "/catalog/gpu?brand=NVIDIA", labelKey: "home.pq.gpuNvidia", brandLogo: "NVIDIA" },
-  { href: "/catalog/cpu?brand=Intel", labelKey: "home.pq.cpuIntel", brandLogo: "intel" },
+  { href: "/catalog/gpu?brand=NVIDIA", labelKey: "home.pq.gpuNvidia", brandLogo: "/brands/nvidia.png" },
+  { href: "/catalog/cpu?brand=Intel", labelKey: "home.pq.cpuIntel", brandLogo: "/brands/intel.png" },
   { href: "/catalog/motherboard?socket=LGA1700", labelKey: "home.pq.mbIntel", icon: CircuitBoard },
-  { href: "/catalog/ram?ramType=DDR5", labelKey: "home.pq.ramDdr5", icon: MemoryStick },
-  { href: "/catalog/gpu?brand=AMD", labelKey: "home.pq.gpuAmd", brandLogo: "AMD" },
-  { href: "/catalog/cpu?brand=AMD", labelKey: "home.pq.cpuAmd", brandLogo: "AMD RYZEN" },
+  { href: "/catalog/ram?ramType=DDR5", labelKey: "home.pq.ramDdr5", brandLogo: "/products/ram.png" },
+  { href: "/catalog/gpu?brand=AMD", labelKey: "home.pq.gpuAmd", brandLogo: "/brands/amd.png" },
+  { href: "/catalog/cpu?brand=AMD", labelKey: "home.pq.cpuAmd", brandLogo: "/brands/amd.png" },
   { href: "/catalog/motherboard?socket=AM5", labelKey: "home.pq.mbAmd", icon: CircuitBoard },
   { href: "/builds", labelKey: "home.pq.gamingPc", icon: Monitor },
   { href: "/catalog/headset?subtype=mouse", labelKey: "home.pq.gamingMice", icon: Mouse },
-  { href: "/catalog/headset?subtype=keyboard", labelKey: "home.pq.gamingKeyboards", icon: Keyboard },
-  { href: "/catalog/headset?subtype=headphones", labelKey: "home.pq.gamingHeadsets", icon: Headphones },
+  { href: "/catalog/headset?subtype=keyboard", labelKey: "home.pq.gamingKeyboards", brandLogo: "/products/keyboard.png" },
+  { href: "/catalog/headset?subtype=headphones", labelKey: "home.pq.gamingHeadsets", brandLogo: "/products/headset.png" },
   { href: "/builder", labelKey: "nav.configurator", icon: Wrench },
 ];
 
@@ -136,11 +136,15 @@ export default function HomeClient({ builds }: { builds: any[] }) {
               href={q.href}
               className="flex items-center gap-3 px-4 py-3.5 rounded-xl bg-[var(--color-surface)] border border-[var(--color-border)] hover:border-[var(--color-brand)] hover:bg-[var(--color-surface-2)] transition-all group"
             >
-              <div className="w-10 h-10 rounded-lg bg-[var(--color-surface-2)] flex items-center justify-center shrink-0 overflow-hidden">
+              <div className={`flex items-center justify-center shrink-0 overflow-hidden ${q.brandLogo ? "w-12 h-12" : "w-10 h-10 rounded-lg bg-[var(--color-surface-2)]"}`}>
                 {q.brandLogo ? (
-                  <span className="text-[10px] font-black leading-tight text-center text-[var(--color-muted)] group-hover:text-[var(--color-foreground)] transition">
-                    {q.brandLogo}
-                  </span>
+                  <Image
+                    src={q.brandLogo}
+                    alt=""
+                    width={40}
+                    height={40}
+                    className="object-contain"
+                  />
                 ) : q.icon ? (
                   <q.icon size={20} className="text-[var(--color-muted)] group-hover:text-[var(--color-foreground)] transition" />
                 ) : null}

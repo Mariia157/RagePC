@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
 import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
 import { getCart } from "@/lib/cart";
 import { getCurrentUserId } from "@/lib/session";
 import { formatPrice } from "@/lib/categories";
@@ -18,8 +19,8 @@ export default async function CheckoutPage() {
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-8">
-      <Link href="/cart" className="text-sm text-[var(--color-muted)] hover:text-white">
-        ← Кошик
+      <Link href="/cart" className="text-sm text-[var(--color-muted)] hover:text-white inline-flex items-center gap-1">
+        <ArrowLeft size={14} /> Кошик
       </Link>
       <h1 className="text-3xl font-bold mt-2 mb-6">Оформлення замовлення</h1>
 

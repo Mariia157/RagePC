@@ -134,8 +134,8 @@ const dict = {
 
   // Sort
   "sort.popular": { uk: "Популярні", ru: "Популярные", en: "Popular" },
-  "sort.priceAsc": { uk: "Ціна ↑", ru: "Цена ↑", en: "Price ↑" },
-  "sort.priceDesc": { uk: "Ціна ↓", ru: "Цена ↓", en: "Price ↓" },
+  "sort.priceAsc": { uk: "Ціна (зрост.)", ru: "Цена (возр.)", en: "Price (asc)" },
+  "sort.priceDesc": { uk: "Ціна (спад.)", ru: "Цена (убыв.)", en: "Price (desc)" },
   "sort.name": { uk: "За алфавітом", ru: "По алфавиту", en: "Alphabetical" },
 
   // Peripherals subtypes

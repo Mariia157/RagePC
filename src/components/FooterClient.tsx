@@ -34,27 +34,27 @@ export default function FooterClient() {
   ];
 
   return (
-    <footer className="border-t border-[var(--color-border)] mt-16 bg-[var(--color-surface)]/40">
+    <footer className="border-t border-white/10 mt-16 bg-[#111] text-white">
       <div className="mx-auto max-w-7xl px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div>
             <div className="flex items-center gap-2">
               <Image src="/logo.png" alt="RagePC" width={32} height={32} className="w-8 h-8 object-contain" />
               <span className="text-2xl font-black">
-                <span className="text-[var(--color-foreground)]">Rage</span>
+                <span className="text-white">Rage</span>
                 <span className="text-[var(--color-brand)]">PC</span>
               </span>
             </div>
-            <p className="mt-3 text-sm text-[var(--color-muted)] leading-relaxed">{t("footer.desc")}</p>
+            <p className="mt-3 text-sm text-white/60 leading-relaxed">{t("footer.desc")}</p>
             <div className="mt-4"><SocialIcons size={20} /></div>
           </div>
 
           <div>
             <h3 className="font-semibold mb-4">{t("footer.catalog")}</h3>
-            <ul className="space-y-2 text-sm text-[var(--color-muted)]">
+            <ul className="space-y-2 text-sm text-white/60">
               {shopLinks.map((l) => (
                 <li key={l.href}>
-                  <Link href={l.href} className="hover:text-[var(--color-foreground)] transition">{t(l.labelKey)}</Link>
+                  <Link href={l.href} className="hover:text-white transition">{t(l.labelKey)}</Link>
                 </li>
               ))}
             </ul>
@@ -62,10 +62,10 @@ export default function FooterClient() {
 
           <div>
             <h3 className="font-semibold mb-4">{t("footer.service")}</h3>
-            <ul className="space-y-2 text-sm text-[var(--color-muted)]">
+            <ul className="space-y-2 text-sm text-white/60">
               {serviceLinks.map((l) => (
                 <li key={l.href}>
-                  <Link href={l.href} className="hover:text-[var(--color-foreground)] transition">{t(l.labelKey)}</Link>
+                  <Link href={l.href} className="hover:text-white transition">{t(l.labelKey)}</Link>
                 </li>
               ))}
             </ul>
@@ -73,7 +73,7 @@ export default function FooterClient() {
 
           <div>
             <h3 className="font-semibold mb-4">{t("footer.contacts")}</h3>
-            <ul className="space-y-3 text-sm text-[var(--color-muted)]">
+            <ul className="space-y-3 text-sm text-white/60">
               <li className="flex items-center gap-2">
                 <Mail size={16} className="text-[var(--color-brand)] shrink-0" />
                 info@ragepc.ua
@@ -90,11 +90,11 @@ export default function FooterClient() {
           </div>
         </div>
 
-        <div className="mt-10 pt-6 border-t border-[var(--color-border)] flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-[var(--color-muted)]">
+        <div className="mt-10 pt-6 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-white/50">
           <div>© {new Date().getFullYear()} RagePC. {t("footer.rights")}</div>
           <div className="flex gap-4">
             <span>{t("footer.payment")}</span>
-            <span>•</span>
+            <span className="w-1 h-1 rounded-full bg-white/40" />
             <span>{t("footer.shipping")}</span>
           </div>
         </div>

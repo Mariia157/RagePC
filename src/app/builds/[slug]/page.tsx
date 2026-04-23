@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import { Check } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import { CATEGORIES, formatPrice, type Category } from "@/lib/categories";
 import AddBuildButton from "@/components/AddBuildButton";
@@ -89,10 +90,10 @@ export default async function BuildDetailPage({
           <div className="card p-4 text-sm">
             <div className="font-semibold mb-2">Що входить</div>
             <ul className="text-[var(--color-muted)] space-y-1">
-              <li>✓ Збирання та монтаж</li>
-              <li>✓ Тестування стабільності</li>
-              <li>✓ Встановлення Windows 11</li>
-              <li>✓ Гарантія 2 роки</li>
+              <li className="flex items-center gap-1.5"><Check size={14} className="text-[var(--color-brand)] shrink-0" /> Збирання та монтаж</li>
+              <li className="flex items-center gap-1.5"><Check size={14} className="text-[var(--color-brand)] shrink-0" /> Тестування стабільності</li>
+              <li className="flex items-center gap-1.5"><Check size={14} className="text-[var(--color-brand)] shrink-0" /> Встановлення Windows 11</li>
+              <li className="flex items-center gap-1.5"><Check size={14} className="text-[var(--color-brand)] shrink-0" /> Гарантія 2 роки</li>
             </ul>
           </div>
         </aside>

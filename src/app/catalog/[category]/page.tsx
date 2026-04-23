@@ -22,8 +22,8 @@ type SortKey = keyof typeof SORTS;
 
 const SORT_LABELS: Record<SortKey, string> = {
   popular: "Популярні",
-  "price-asc": "Ціна ↑",
-  "price-desc": "Ціна ↓",
+  "price-asc": "Ціна (зрост.)",
+  "price-desc": "Ціна (спад.)",
 };
 
 // Spec filter config per category

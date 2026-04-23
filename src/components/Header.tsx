@@ -22,8 +22,8 @@ export default async function Header() {
   return (
     <header className="sticky top-0 z-40 bg-black/90 backdrop-blur-md">
       {/* Top bar — hidden on mobile */}
-      <div className="border-b border-[var(--color-border)] hidden sm:block">
-        <div className="mx-auto max-w-7xl px-4 flex items-center justify-between h-10 text-xs text-[var(--color-muted)]">
+      <div className="border-b border-white/10 hidden sm:block bg-[var(--color-brand)]">
+        <div className="mx-auto max-w-7xl px-4 flex items-center justify-between h-10 text-xs text-white [&_*]:!text-white [&_button]:hover:!bg-white/15 [&_a]:hover:!bg-white/15">
           <HeaderTopInfo />
           <div className="flex items-center gap-3">
             <LangSwitcher />

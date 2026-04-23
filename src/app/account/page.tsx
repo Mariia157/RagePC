@@ -4,7 +4,7 @@ import { prisma } from "@/lib/prisma";
 import { getCurrentUserId } from "@/lib/session";
 import { formatPrice } from "@/lib/categories";
 import { logout } from "@/app/(auth)/actions";
-import { Package, LogOut } from "lucide-react";
+import { Package, LogOut, ArrowRight } from "lucide-react";
 
 export default async function AccountPage() {
   const userId = await getCurrentUserId();
@@ -52,8 +52,8 @@ export default async function AccountPage() {
       <div className="mt-10">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-xl font-bold">Останні замовлення</h2>
-          <Link href="/account/orders" className="text-sm text-[var(--color-brand)] hover:underline">
-            Усі замовлення →
+          <Link href="/account/orders" className="text-sm text-[var(--color-brand)] hover:underline inline-flex items-center gap-1">
+            Усі замовлення <ArrowRight size={14} />
           </Link>
         </div>
         {recentOrders.length === 0 ? (
