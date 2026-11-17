@@ -1,43 +1,45 @@
 # RagePC
 
-Інтернет-магазин комплектуючих, готових збірок та ігрової периферії. Головне в ньому конфігуратор: він веде від процесора до блока живлення й на кожному кроці ховає деталі, які не підійдуть до вже обраних.
+An online store for PC components, prebuilt systems and gaming peripherals. Its centerpiece is the configurator: it walks you from the CPU to the power supply and, at every step, hides the parts that won't fit what you have already picked.
 
-![Головна сторінка](docs/rage-home.webp)
+The storefront interface is in Ukrainian, with Russian and English available.
 
-## Можливості
+![Home page](docs/rage-home.webp)
 
-- **Конфігуратор із перевіркою сумісності.** Сокет процесора й плати, тип пам'яті, форм-фактор плати й корпусу, довжина відеокарти, TDP кулера. Несумісні варіанти блокуються з поясненням.
-- **Розрахунок живлення.** Конфігуратор рахує сумарне споживання збірки й відсіює блоки живлення без запасу.
-- **Готові збірки.** Перевірені конфігурації під 1080p, 1440p і 4K та компактна ITX.
-- **Каталог.** Категорії, фільтри за ціною, брендом і характеристиками, сортування, акції.
-- **Покупка.** Обране, кошик, оформлення замовлення, реєстрація й особистий кабінет з історією замовлень.
-- **Trade-In** для старого заліза.
-- **Три мови інтерфейсу** (українська, російська, англійська), світла й темна тема, адаптивна верстка.
+## Features
 
-![Конфігуратор](docs/rage-configure.webp)
+- **Configurator with compatibility checks.** CPU and motherboard socket, memory type, motherboard and case form factor, GPU length, cooler TDP. Incompatible options are blocked with an explanation.
+- **Power estimate.** The configurator adds up the build's power draw and filters out power supplies without enough headroom.
+- **Prebuilt PCs.** Tested configurations for 1080p, 1440p and 4K, plus a compact ITX build.
+- **Catalog.** Categories, filters by price, brand and specs, sorting, sales.
+- **Checkout flow.** Favorites, cart, checkout, sign-up and an account page with order history.
+- **Trade-In** for old hardware.
+- **Three interface languages** (Ukrainian, Russian, English), light and dark themes, responsive layout.
 
-| Готові збірки | Телефон |
+![Configurator](docs/rage-configure.webp)
+
+| Prebuilt PCs | Phone |
 |---|---|
-| ![Готові збірки](docs/rage-builds.webp) | <img src="docs/rage-mobile.webp" alt="Мобільна версія" width="220"> |
+| ![Prebuilt PCs](docs/rage-builds.webp) | <img src="docs/rage-mobile.webp" alt="Mobile layout" width="220"> |
 
-## Стек
+## Stack
 
 - **Next.js 16** (App Router, Server Actions), **React 19**, **TypeScript**
-- **Prisma 7** + **PostgreSQL** через `@prisma/adapter-pg`
-- **Tailwind CSS v4**, іконки **lucide-react**
-- Сесії на cookie, паролі через **bcryptjs**
+- **Prisma 7** + **PostgreSQL** via `@prisma/adapter-pg`
+- **Tailwind CSS v4**, **lucide-react** icons
+- Cookie-based sessions, passwords hashed with **bcryptjs**
 
-Логіка сумісності лежить у [`src/lib/compatibility.ts`](src/lib/compatibility.ts), переклади в [`src/lib/i18n.ts`](src/lib/i18n.ts).
+The compatibility logic lives in [`src/lib/compatibility.ts`](src/lib/compatibility.ts), translations in [`src/lib/i18n.ts`](src/lib/i18n.ts).
 
-## Локальний запуск
+## Running locally
 
-Потрібні Node.js 20+ і PostgreSQL.
+Requires Node.js 20+ and PostgreSQL.
 
 ```bash
 npm install
 echo 'DATABASE_URL="postgresql://USER:PASSWORD@localhost:5432/ragepc"' > .env
 npx prisma migrate deploy
 npx prisma generate
-npx tsx prisma/seed.ts      # 53 товари і 4 готові збірки
+npx tsx prisma/seed.ts      # 53 products and 4 prebuilt PCs
 npm run dev                 # http://localhost:3000
 ```
